@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Eight local Chromium screens, scroll controls, and measured activity.">
+  <title>Content Ops Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <main>
+    <header class="masthead">
+      <div>
+        <h1>Content Ops Dashboard</h1>
+        <p>Monitor eight browser screens and replay scroll workflows on local test feeds.</p>
+      </div>
+      <p class="connection" id="connection" role="status">Connecting to local browser worker…</p>
+    </header>
+    <nav aria-label="Dashboard views">
+      <button id="screens-tab" type="button" aria-current="page">Screens</button>
+      <button id="statistics-tab" type="button">Statistics</button>
+    </nav>
+    <p id="error" role="alert"></p>
+    <section id="screens-panel" aria-labelledby="screens-tab">
+      <p class="hint">Choose a local YouTube, Instagram, or TikTok feed. Auto-scroll starts only when you press Play.</p>
+      <div id="screens" class="grid"></div>
+    </section>
+    <section id="statistics-panel" aria-labelledby="statistics-tab" hidden>
+      <dl class="metrics">
+        <div><dt>Captured scrolls</dt><dd id="total">0</dd></div>
+        <div><dt>Auto-scrolling screens</dt><dd id="playing">0</dd></div>
+        <div><dt>Screens</dt><dd id="screen-count">0</dd></div>
+      </dl>
+      <section class="panel" aria-labelledby="platform-totals">
+        <h2 id="platform-totals">Scrolls by feed</h2>
+        <div class="table" tabindex="0" role="region" aria-labelledby="platform-totals">
+          <table><thead><tr><th scope="col">Feed</th><th scope="col">Manual</th><th scope="col">Automatic</th><th scope="col">Total</th></tr></thead>
+            <tbody id="platform-rows"></tbody></table>
+        </div>
+      </section>
+      <section class="panel" aria-labelledby="recent-activity">
+        <h2 id="recent-activity">Recent scrolls</h2>
+        <p id="empty-events" class="hint">Scroll a screen to see its new position here.</p>
+        <div class="table" tabindex="0" role="region" aria-labelledby="recent-activity">
+          <table><thead><tr><th scope="col">Time (UTC)</th><th scope="col">Screen</th><th scope="col">Feed</th><th scope="col">Action</th><th scope="col">Position</th><th scope="col">Item</th></tr></thead>
+            <tbody id="event-rows"></tbody></table>
+        </div>
+      </section>
+      <p class="hint">These are local browser actions, not platform views or account analytics. Activity resets when the server stops.</p>
+    </section>
+  </main>
+
+  <template id="screen-template">
+    <article class="screen">
+      <header><h2></h2><span data-state></span></header>
+      <img width="400" height="330" alt="">
+      <div class="content">
+        <div class="title"><p data-title></p><span data-position></span></div>
+        <div class="inputs">
+          <label>Feed<select data-feed>
+            <option value="youtube">YouTube</option>
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+          </select></label>
+          <label>Scroll every<select data-cadence>
+            <option value="1500">1.5 s</option>
+            <option value="3000">3 s</option>
+            <option value="6000">6 s</option>
+          </select></label>
+        </div>
+        <div class="actions">
+          <button type="button" data-play>Play</button>
+          <button type="button" data-next>Next</button>
+          <button type="button" data-reset>Reset</button>
+        </div>
+        <p data-error></p>
+      </div>
+    </article>
+  </template>
+</body>
+</html>
