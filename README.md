@@ -1,6 +1,6 @@
 # Content Ops Dashboard
 
-An isolated public edition of a multi-screen content-operations dashboard. Eight Chromium pages render local YouTube, Instagram, and TikTok test feeds. The dashboard shows a captured browser image for each screen, lets you step or auto-scroll it, and records what actually moved.
+See eight Chromium screens in one dashboard. Each shows a local YouTube, Instagram, or TikTok test feed that you can scroll by hand or on a timer. The statistics count observed scrolls, not views on those platforms.
 
 ![Eight Chromium screens showing local test feeds](docs/screens.jpg)
 
